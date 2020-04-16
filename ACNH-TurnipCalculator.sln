@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29911.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACNH-TurnipCalculator", "ACNH-TurnipCalculator\ACNH-TurnipCalculator.csproj", "{804E50B8-B0B3-4712-A6EB-08E741E5D222}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{804E50B8-B0B3-4712-A6EB-08E741E5D222}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{804E50B8-B0B3-4712-A6EB-08E741E5D222}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{804E50B8-B0B3-4712-A6EB-08E741E5D222}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{804E50B8-B0B3-4712-A6EB-08E741E5D222}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B7C7D0F6-A0A8-4DDD-A9B2-226B242853AD}
+	EndGlobalSection
+EndGlobal
