@@ -5,8 +5,98 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ACNH_TurnipCalculator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Turnip Calculator" ResizeMode="NoResize" SizeToContent="WidthAndHeight">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Exit"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="_About"></MenuItem>
+        </Menu>
+        <Grid HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <GroupBox Grid.Column="0" Grid.Row="0" Header="Input Data" HorizontalAlignment="Stretch" Margin="5" Padding="10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Text="First-time buyer:" Margin="0 0 5 0"></TextBlock>
+                    <ComboBox x:Name="cmbFirstTimeBuyer" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" Margin="5 0 0 0" Width="60" Height="22">
+                        <ComboBoxItem>Yes</ComboBoxItem>
+                        <ComboBoxItem IsSelected="True">No</ComboBoxItem>
+                    </ComboBox>
+                    
+                    <TextBlock Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Text="Buying Price:" Margin="0 0 5 0"></TextBlock>
+                    <TextBox x:Name="tbBasePrice" Grid.Column="1" Grid.Row="1" Width="50" HorizontalAlignment="Left" Margin="5 5 0 5" Height="22"></TextBox>
 
-    </Grid>
+                    <TextBlock Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Text="Buying Date:" Margin=" 0 0 5 5"></TextBlock>
+                    <DatePicker Grid.Column="1" Grid.Row="2" Name="dpBuyingDate" Margin="5 0 0 5" Width="110" IsTodayHighlighted="True" FirstDayOfWeek="Sunday" DisplayDateStart="2020-03-20" DisplayDateEnd="2099-12-31"></DatePicker>
+                    
+                    <TextBlock Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Text="Previous Pattern:" Margin="0 0 5 0"></TextBlock>
+                    <ComboBox x:Name="cmbPreviousPattern" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Margin="5 0 0 0" Height="22" Width="100">
+                        <ComboBoxItem IsSelected="True">I don't know</ComboBoxItem>
+                        <ComboBoxItem>Random</ComboBoxItem>
+                        <ComboBoxItem>Large Spike</ComboBoxItem>
+                        <ComboBoxItem>Decreasing</ComboBoxItem>
+                        <ComboBoxItem>Small Spike</ComboBoxItem>
+                    </ComboBox>
+                </Grid>
+            </GroupBox>
+            <GroupBox Grid.Column="0" Grid.Row="1" Header="Week Prices" HorizontalAlignment="Stretch" Margin="5" Padding="10 10 5 10">
+                <Grid HorizontalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" Margin="0 0 0 5">AM</TextBlock>
+                    <TextBlock Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center">PM</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 5 0">Monday</TextBlock>
+                    <TextBox x:Name="tbMondayAMPrice" Grid.Column="1" Grid.Row="1" Width="45" Margin="0" Height="22"></TextBox>
+                    <TextBox x:Name="tbMondayPMPrice" Grid.Column="2" Grid.Row="1" Width="45" Margin="0" Height="22"></TextBox>
+                    <TextBlock Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 5 0">Tuesday</TextBlock>
+                    <TextBox x:Name="tbTuesdayAMPrice" Grid.Column="1" Grid.Row="2" Width="45" Margin="5" Height="22"></TextBox>
+                    <TextBox x:Name="tbTuesdayPMPrice" Grid.Column="2" Grid.Row="2" Width="45" Margin="5" Height="22"></TextBox>
+                    <TextBlock Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 5 0">Wednesday</TextBlock>
+                    <TextBox x:Name="tbWednesdayAMPrice" Grid.Column="1" Grid.Row="3" Width="45" Margin="0" Height="22"></TextBox>
+                    <TextBox x:Name="tbWednesdayPMPrice" Grid.Column="2" Grid.Row="3" Width="45" Margin="0" Height="22"></TextBox>
+                    <TextBlock Grid.Column="0" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 5 0">Thursday</TextBlock>
+                    <TextBox x:Name="tbThursdayAMPrice" Grid.Column="1" Grid.Row="4" Width="45" Margin="5" Height="22"></TextBox>
+                    <TextBox x:Name="tbThursdayPMPrice" Grid.Column="2" Grid.Row="4" Width="45" Margin="5" Height="22"></TextBox>
+                    <TextBlock Grid.Column="0" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 5 0">Friday</TextBlock>
+                    <TextBox x:Name="tbFridayAMPrice" Grid.Column="1" Grid.Row="5" Width="45" Margin="0" Height="22"></TextBox>
+                    <TextBox x:Name="tbFridayPMPrice" Grid.Column="2" Grid.Row="5" Width="45" Margin="0" Height="22"></TextBox>
+                    <TextBlock Grid.Column="0" Grid.Row="6" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 5 0">Saturday</TextBlock>
+                    <TextBox x:Name="tbSaturdayAMPrice" Grid.Column="1" Grid.Row="6" Width="45" Margin="0 5 0 0" Height="22"></TextBox>
+                    <TextBox x:Name="tbSaturdayPMPrice" Grid.Column="2" Grid.Row="6" Width="45" Margin="0 5 0 0" Height="22"></TextBox>
+                </Grid>
+            </GroupBox>
+            <GroupBox Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Header="Graph" HorizontalAlignment="Stretch" Margin="5" Padding="10 10 5 10">
+                
+            </GroupBox>
+        </Grid>
+    </DockPanel>
 </Window>
