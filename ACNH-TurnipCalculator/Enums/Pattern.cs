@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ACNH_TurnipCalculator.Enums
 {
-    public enum PatternEnum
+    public enum Pattern
     {
         [Description("Random")]
         Random,

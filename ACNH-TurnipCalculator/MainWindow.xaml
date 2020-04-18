@@ -22,11 +22,11 @@
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <GroupBox Grid.Column="0" Grid.Row="0" Header="Input Data" HorizontalAlignment="Stretch" Margin="5" Padding="10">
-                <Grid>
+            <GroupBox Grid.Column="0" Grid.Row="0" Header="Input Data" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" Padding="10">
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"></RowDefinition>
@@ -35,29 +35,30 @@
                         <RowDefinition Height="auto"></RowDefinition>
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Text="First-time buyer:" Margin="0 0 5 0"></TextBlock>
-                    <ComboBox x:Name="cmbFirstTimeBuyer" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" Margin="5 0 0 0" Width="60" Height="22">
-                        <ComboBoxItem Name="cbiFirstTimeNo" IsSelected="True">No</ComboBoxItem>
-                        <ComboBoxItem Name="cbiFirstTimeYes">Yes</ComboBoxItem>
+                    <ComboBox x:Name="cmbFirstTimeBuyer" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" Margin="5 0 0 0" Width="60" Height="22" SelectionChanged="updatePreviousWeekPattern">
+                        <!--<ComboBoxItem Name="cbiFirstTimeNo">No</ComboBoxItem>
+                        <ComboBoxItem Name="cbiFirstTimeYes">Yes</ComboBoxItem>-->
                     </ComboBox>
                     
                     <TextBlock Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Text="Buying Price:" Margin="0 0 5 0"></TextBlock>
-                    <TextBox x:Name="tbBasePrice" Grid.Column="1" Grid.Row="1" Width="50" HorizontalAlignment="Left" Margin="5 5 0 5" Height="22"></TextBox>
+                    <TextBox x:Name="tbBasePrice" Grid.Column="1" Grid.Row="1" Width="50" HorizontalAlignment="Left" Margin="5 5 0 5" Height="22" TextChanged="updateBasePrice" PreviewTextInput="textBoxNumberValidation"></TextBox>
 
                     <TextBlock Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Text="Buying Date:" Margin=" 0 0 5 5"></TextBlock>
-                    <DatePicker Grid.Column="1" Grid.Row="2" Name="dpBuyingDate" HorizontalAlignment="Left" Margin="5 0 0 5" Width="110" IsTodayHighlighted="True" FirstDayOfWeek="Sunday" DisplayDateStart="2020-03-20" DisplayDateEnd="2099-12-31"></DatePicker>
+                    <DatePicker Grid.Column="1" Grid.Row="2" Name="dpBuyingDate" HorizontalAlignment="Left" Margin="5 0 0 5" Width="110" IsTodayHighlighted="True" FirstDayOfWeek="Sunday" DisplayDateStart="2020-03-20" DisplayDateEnd="2099-12-31" SelectedDateChanged="updateBuyingDate"></DatePicker>
                     
                     <TextBlock Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Text="Previous Pattern:" Margin="0 0 5 0"></TextBlock>
-                    <ComboBox x:Name="cmbPreviousPattern" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Margin="5 0 0 0" Height="22" Width="120">
-                        <ComboBoxItem Name="cbiUnkown" IsSelected="True">I don't remember</ComboBoxItem>
-                        <ComboBoxItem Name="cbiRandom">Random</ComboBoxItem>
+                    <ComboBox x:Name="cmbPreviousPattern" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Margin="5 0 0 0" Height="22" Width="120" SelectionChanged="updatePreviousWeekPattern">
+                        <!--<ComboBoxItem Name="cbiRandom">Random</ComboBoxItem>
                         <ComboBoxItem Name="cbiLargeSpike">Large Spike</ComboBoxItem>
                         <ComboBoxItem Name="cbiDecreasing">Decreasing</ComboBoxItem>
                         <ComboBoxItem Name="cbiSmallSpike">Small Spike</ComboBoxItem>
+                        <ComboBoxItem Name="cbiUnkown">I don't remember</ComboBoxItem>-->
                     </ComboBox>
                 </Grid>
             </GroupBox>
-            <GroupBox Grid.Column="0" Grid.Row="1" Header="Week Prices" HorizontalAlignment="Stretch" Margin="5" Padding="10 10 5 10">
-                <Grid HorizontalAlignment="Center">
+            
+            <GroupBox Grid.Column="0" Grid.Row="1" Header="Week Prices" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" Padding="5">
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -75,29 +76,86 @@
                     <TextBlock Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" Margin="0 0 0 5">AM</TextBlock>
                     <TextBlock Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center">PM</TextBlock>
                     <TextBlock Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 5 0">Monday</TextBlock>
-                    <TextBox x:Name="tbMondayAMPrice" Grid.Column="1" Grid.Row="1" Width="45" Margin="0" Height="22"></TextBox>
-                    <TextBox x:Name="tbMondayPMPrice" Grid.Column="2" Grid.Row="1" Width="45" Margin="0" Height="22"></TextBox>
+                    <TextBox x:Name="tbMondayAMPrice" Grid.Column="1" Grid.Row="1" PreviewTextInput="textBoxNumberValidation" Width="45" Margin="0" Height="22"></TextBox>
+                    <TextBox x:Name="tbMondayPMPrice" Grid.Column="2" Grid.Row="1" PreviewTextInput="textBoxNumberValidation" Width="45" Margin="0" Height="22"></TextBox>
                     <TextBlock Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 5 0">Tuesday</TextBlock>
-                    <TextBox x:Name="tbTuesdayAMPrice" Grid.Column="1" Grid.Row="2" Width="45" Margin="5" Height="22"></TextBox>
-                    <TextBox x:Name="tbTuesdayPMPrice" Grid.Column="2" Grid.Row="2" Width="45" Margin="5" Height="22"></TextBox>
+                    <TextBox x:Name="tbTuesdayAMPrice" Grid.Column="1" Grid.Row="2" PreviewTextInput="textBoxNumberValidation" Width="45" Margin="5" Height="22"></TextBox>
+                    <TextBox x:Name="tbTuesdayPMPrice" Grid.Column="2" Grid.Row="2" PreviewTextInput="textBoxNumberValidation" Width="45" Margin="5" Height="22"></TextBox>
                     <TextBlock Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 5 0">Wednesday</TextBlock>
-                    <TextBox x:Name="tbWednesdayAMPrice" Grid.Column="1" Grid.Row="3" Width="45" Margin="0" Height="22"></TextBox>
-                    <TextBox x:Name="tbWednesdayPMPrice" Grid.Column="2" Grid.Row="3" Width="45" Margin="0" Height="22"></TextBox>
+                    <TextBox x:Name="tbWednesdayAMPrice" Grid.Column="1" Grid.Row="3" PreviewTextInput="textBoxNumberValidation" Width="45" Margin="0" Height="22"></TextBox>
+                    <TextBox x:Name="tbWednesdayPMPrice" Grid.Column="2" Grid.Row="3" PreviewTextInput="textBoxNumberValidation" Width="45" Margin="0" Height="22"></TextBox>
                     <TextBlock Grid.Column="0" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 5 0">Thursday</TextBlock>
-                    <TextBox x:Name="tbThursdayAMPrice" Grid.Column="1" Grid.Row="4" Width="45" Margin="5" Height="22"></TextBox>
-                    <TextBox x:Name="tbThursdayPMPrice" Grid.Column="2" Grid.Row="4" Width="45" Margin="5" Height="22"></TextBox>
+                    <TextBox x:Name="tbThursdayAMPrice" Grid.Column="1" Grid.Row="4" PreviewTextInput="textBoxNumberValidation" Width="45" Margin="5" Height="22"></TextBox>
+                    <TextBox x:Name="tbThursdayPMPrice" Grid.Column="2" Grid.Row="4" PreviewTextInput="textBoxNumberValidation" Width="45" Margin="5" Height="22"></TextBox>
                     <TextBlock Grid.Column="0" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 5 0">Friday</TextBlock>
-                    <TextBox x:Name="tbFridayAMPrice" Grid.Column="1" Grid.Row="5" Width="45" Margin="0" Height="22"></TextBox>
-                    <TextBox x:Name="tbFridayPMPrice" Grid.Column="2" Grid.Row="5" Width="45" Margin="0" Height="22"></TextBox>
+                    <TextBox x:Name="tbFridayAMPrice" Grid.Column="1" Grid.Row="5" PreviewTextInput="textBoxNumberValidation" Width="45" Margin="0" Height="22"></TextBox>
+                    <TextBox x:Name="tbFridayPMPrice" Grid.Column="2" Grid.Row="5" PreviewTextInput="textBoxNumberValidation" Width="45" Margin="0" Height="22"></TextBox>
                     <TextBlock Grid.Column="0" Grid.Row="6" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 5 5 0">Saturday</TextBlock>
-                    <TextBox x:Name="tbSaturdayAMPrice" Grid.Column="1" Grid.Row="6" Width="45" Margin="0 5 0 0" Height="22"></TextBox>
-                    <TextBox x:Name="tbSaturdayPMPrice" Grid.Column="2" Grid.Row="6" Width="45" Margin="0 5 0 0" Height="22"></TextBox>
+                    <TextBox x:Name="tbSaturdayAMPrice" Grid.Column="1" Grid.Row="6" PreviewTextInput="textBoxNumberValidation" Width="45" Margin="0 5 0 0" Height="22"></TextBox>
+                    <TextBox x:Name="tbSaturdayPMPrice" Grid.Column="2" Grid.Row="6" PreviewTextInput="textBoxNumberValidation" Width="45" Margin="0 5 0 0" Height="22"></TextBox>
                 </Grid>
             </GroupBox>
-            <GroupBox Grid.Column="1" Grid.Row="0" Header="Calculations" HorizontalAlignment="Stretch" Margin="5" Padding="10 10 5 10">
 
+            <GroupBox Grid.Column="1" Grid.Row="0" Header="Calculations" HorizontalAlignment="Stretch" Margin="5" Padding="5" VerticalAlignment="Stretch">
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Grid.Column="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="Previous Week:" HorizontalAlignment="Right"></TextBlock>
+                        <TextBlock x:Name="lbPreviousWeek" Grid.Column="1" Grid.Row="0" Text="TBD" HorizontalAlignment="Left" Margin="5 0 0 0"></TextBlock>
+
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="Current Week:" HorizontalAlignment="Right" Margin="0 5 0 0"></TextBlock>
+                        <TextBlock x:Name="lbCurrentWeek" Grid.Column="1" Grid.Row="1" Text="TBD" HorizontalAlignment="Left" Margin="5 5 0 0"></TextBlock>
+
+                        <TextBlock Grid.Column="0" Grid.Row="2" Text="Base Price:" HorizontalAlignment="Right" Margin="0 5 0 0"></TextBlock>
+                        <TextBlock x:Name="lbBasePrice" Grid.Column="1" Grid.Row="2" Text="TBD" HorizontalAlignment="Left" Margin="5 5 0 0"></TextBlock>
+
+                        <TextBlock Grid.Column="0" Grid.Row="3" Text="Buying Date:" HorizontalAlignment="Right" Margin="0 5 0 0"></TextBlock>
+                        <TextBlock x:Name="lbBuyingDate" Grid.Column="1" Grid.Row="3" Text="TBD" HorizontalAlignment="Left" Margin="5 5 0 0" Width="75"></TextBlock>
+                    </Grid>
+
+                    <GroupBox Grid.Row="0" Grid.Column="1" Margin="15 5 5 5" Header="Chances for this week" Padding="10 10 5 10" HorizontalAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Random:" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" Margin="0 0 5 0"></TextBlock>
+                            <TextBlock x:Name="lbRandomChance" Text="TBD" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" Width="50"></TextBlock>
+                            <TextBlock Text="Large Spike:" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Right" Margin="0 0 5 0"></TextBlock>
+                            <TextBlock x:Name="lbLargeSpikeChance" Text="TBD" Grid.Column="3" Grid.Row="0" HorizontalAlignment="Left" Width="30"></TextBlock>
+                            <TextBlock Text="Decreasing:" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" Margin="0 5 5 0"></TextBlock>
+                            <TextBlock x:Name="lbDecreasingChance" Text="TBD" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Margin="0 5 0 0"></TextBlock>
+                            <TextBlock Text="Small Spike:" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Right" Margin="0 5 5 0"></TextBlock>
+                            <TextBlock x:Name="lbSmallSpikeChance" Text="TBD" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Left" Width="30" Margin="0 5 0 0"></TextBlock>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
             </GroupBox>
-            <GroupBox Grid.Column="1" Grid.Row="1" Header="Graph" HorizontalAlignment="Stretch" Margin="5" Padding="10 10 5 10">
+            
+            <GroupBox Grid.Column="1" Grid.Row="1" Header="Graph" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" Padding="5">
                 
             </GroupBox>
         </Grid>
