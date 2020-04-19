@@ -39,13 +39,13 @@
                         <!--<ComboBoxItem Name="cbiFirstTimeNo">No</ComboBoxItem>
                         <ComboBoxItem Name="cbiFirstTimeYes">Yes</ComboBoxItem>-->
                     </ComboBox>
-                    
+
                     <TextBlock Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Text="Buying Price:" Margin="0 0 5 0"></TextBlock>
                     <TextBox x:Name="tbBasePrice" Grid.Column="1" Grid.Row="1" Width="50" HorizontalAlignment="Left" Margin="5 5 0 5" Height="22" TextChanged="updateBasePrice" PreviewTextInput="textBoxNumberValidation"></TextBox>
 
                     <TextBlock Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Text="Buying Date:" Margin=" 0 0 5 5"></TextBlock>
                     <DatePicker Grid.Column="1" Grid.Row="2" Name="dpBuyingDate" HorizontalAlignment="Left" Margin="5 0 0 5" Width="110" IsTodayHighlighted="True" FirstDayOfWeek="Sunday" DisplayDateStart="2020-03-20" DisplayDateEnd="2099-12-31" SelectedDateChanged="updateBuyingDate"></DatePicker>
-                    
+
                     <TextBlock Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Text="Previous Pattern:" Margin="0 0 5 0"></TextBlock>
                     <ComboBox x:Name="cmbPreviousPattern" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Margin="5 0 0 0" Height="22" Width="120" SelectionChanged="updatePreviousWeekPattern">
                         <!--<ComboBoxItem Name="cbiRandom">Random</ComboBoxItem>
@@ -56,15 +56,16 @@
                     </ComboBox>
                 </Grid>
             </GroupBox>
-            
+
             <GroupBox Grid.Column="0" Grid.Row="1" Header="Week Prices" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" Padding="5">
-                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="auto"></RowDefinition>
@@ -93,6 +94,8 @@
                     <TextBlock Grid.Column="0" Grid.Row="6" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 5 5 0">Saturday</TextBlock>
                     <TextBox x:Name="tbSaturdayAMPrice" Grid.Column="1" Grid.Row="6" PreviewTextInput="textBoxNumberValidation" Width="45" Margin="0 5 0 0" Height="22"></TextBox>
                     <TextBox x:Name="tbSaturdayPMPrice" Grid.Column="2" Grid.Row="6" PreviewTextInput="textBoxNumberValidation" Width="45" Margin="0 5 0 0" Height="22"></TextBox>
+
+                    <Button x:Name="btCalculate" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="3" Margin="0 10 0 0" Width="80" Height="25" Click="btCalculate_Click">Calculate</Button>
                 </Grid>
             </GroupBox>
 
@@ -130,7 +133,7 @@
                         <TextBlock x:Name="lbBuyingDate" Grid.Column="1" Grid.Row="3" Text="TBD" HorizontalAlignment="Left" Margin="5 5 0 0" Width="75"></TextBlock>
                     </Grid>
 
-                    <GroupBox Grid.Row="0" Grid.Column="1" Margin="15 5 5 5" Header="Chances for this week" Padding="10 10 5 10" HorizontalAlignment="Stretch">
+                    <GroupBox Grid.Row="0" Grid.Column="1" Margin="15 5 5 5" Header="Chances for this week" Padding="10 10 5 5" HorizontalAlignment="Stretch">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -154,10 +157,82 @@
                     </GroupBox>
                 </Grid>
             </GroupBox>
-            
-            <GroupBox Grid.Column="1" Grid.Row="1" Header="Graph" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" Padding="5">
-                
-            </GroupBox>
+
+            <TabControl Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" Padding="5">
+                <TabItem Header="Numerical">
+                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock x:Name="lbMonAM" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center">-</TextBlock>
+                        <TextBlock Grid.Row="2" Grid.Column="0" FontSize="10" HorizontalAlignment="Center" Margin="0 5 0 0">Mon AM</TextBlock>
+                        
+                        <TextBlock x:Name="lbMovementMonPM" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center">-</TextBlock>
+                        <TextBlock x:Name="lbMonPM" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center">-</TextBlock>
+                        <TextBlock Grid.Row="2" Grid.Column="1" FontSize="10" HorizontalAlignment="Center" Margin="5 5 5 0">Mon PM</TextBlock>
+
+                        <TextBlock x:Name="lbMovementTueAM" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center">-</TextBlock>
+                        <TextBlock x:Name="lbTueAM" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center">-</TextBlock>
+                        <TextBlock Grid.Row="2" Grid.Column="2" FontSize="10" HorizontalAlignment="Center" Margin="0 5 0 0">Tue AM</TextBlock>
+                        
+                        <TextBlock x:Name="lbMovementTuePM" Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center">-</TextBlock>
+                        <TextBlock x:Name="lbTuePM" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center">-</TextBlock>
+                        <TextBlock Grid.Row="2" Grid.Column="3" FontSize="10" HorizontalAlignment="Center" Margin="5 5 5 0">Tue PM</TextBlock>
+
+                        <TextBlock x:Name="lbMovementWedAM" Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center">-</TextBlock>
+                        <TextBlock x:Name="lbWedAM" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center">-</TextBlock>
+                        <TextBlock Grid.Row="2" Grid.Column="4" FontSize="10" HorizontalAlignment="Center" Margin="0 5 0 0">Wed AM</TextBlock>
+
+                        <TextBlock x:Name="lbMovementWedPM" Grid.Row="0" Grid.Column="5" HorizontalAlignment="Center">-</TextBlock>
+                        <TextBlock x:Name="lbWedPM" Grid.Row="1" Grid.Column="5" HorizontalAlignment="Center">-</TextBlock>
+                        <TextBlock Grid.Row="2" Grid.Column="5" FontSize="10" HorizontalAlignment="Center" Margin="5 5 5 0">Wed PM</TextBlock>
+
+                        <TextBlock x:Name="lbMovementThuAM" Grid.Row="0" Grid.Column="6" HorizontalAlignment="Center">-</TextBlock>
+                        <TextBlock x:Name="lbThuAM" Grid.Row="1" Grid.Column="6" HorizontalAlignment="Center">-</TextBlock>
+                        <TextBlock Grid.Row="2" Grid.Column="6" FontSize="10" HorizontalAlignment="Center" Margin="0 5 0 0">Thu AM</TextBlock>
+
+                        <TextBlock x:Name="lbMovementThuPM" Grid.Row="0" Grid.Column="7" HorizontalAlignment="Center">-</TextBlock>
+                        <TextBlock x:Name="lbThuPM" Grid.Row="1" Grid.Column="7" HorizontalAlignment="Center">-</TextBlock>
+                        <TextBlock Grid.Row="2" Grid.Column="7" FontSize="10" HorizontalAlignment="Center" Margin="5 5 5 0">Thu PM</TextBlock>
+
+                        <TextBlock x:Name="lbMovementFriAM" Grid.Row="0" Grid.Column="8" HorizontalAlignment="Center">-</TextBlock>
+                        <TextBlock x:Name="lbFriAM" Grid.Row="1" Grid.Column="8" HorizontalAlignment="Center">-</TextBlock>
+                        <TextBlock Grid.Row="2" Grid.Column="8" FontSize="10" HorizontalAlignment="Center" Margin="0 5 0 0">Fri AM</TextBlock>
+
+                        <TextBlock x:Name="lbMovementFriPM" Grid.Row="0" Grid.Column="9" HorizontalAlignment="Center">-</TextBlock>
+                        <TextBlock x:Name="lbFriPM" Grid.Row="1" Grid.Column="9" HorizontalAlignment="Center">-</TextBlock>
+                        <TextBlock Grid.Row="2" Grid.Column="9" FontSize="10" HorizontalAlignment="Center" Margin="5 5 5 0">Fri PM</TextBlock>
+
+                        <TextBlock x:Name="lbMovementSatAM" Grid.Row="0" Grid.Column="10" HorizontalAlignment="Center">-</TextBlock>
+                        <TextBlock x:Name="lbSatAM" Grid.Row="1" Grid.Column="10" HorizontalAlignment="Center">-</TextBlock>
+                        <TextBlock Grid.Row="2" Grid.Column="10" FontSize="10" HorizontalAlignment="Center" Margin="0 5 0 0">Sat AM</TextBlock>
+
+                        <TextBlock x:Name="lbMovementSatPM" Grid.Row="0" Grid.Column="11" HorizontalAlignment="Center" Margin="5 0 0 0">-</TextBlock>
+                        <TextBlock x:Name="lbSatPM" Grid.Row="1" Grid.Column="11" HorizontalAlignment="Center" Margin="5 0 0 0">-</TextBlock>
+                        <TextBlock Grid.Row="2" Grid.Column="11" FontSize="10" HorizontalAlignment="Center" Margin="5 5 0 0">Sat PM</TextBlock>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Graph">
+                    <Grid Background="#FFE5E5E5"/>
+                </TabItem>
+            </TabControl>
+
         </Grid>
     </DockPanel>
 </Window>

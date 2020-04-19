@@ -7,6 +7,12 @@ namespace ACNH_TurnipCalculator
 {
     public class Week
     {
+        public const int TOTAL_HALF_DAYS = 12;
+
+        private int[] prices = new int[TOTAL_HALF_DAYS];
+
+        private Movement[] movements = new Movement[TOTAL_HALF_DAYS];
+
         public FirstTimeBuyer FirstTimeBuyer { get; set; }
 
         public Pattern LastWeekPattern { get; set; }
@@ -15,31 +21,34 @@ namespace ACNH_TurnipCalculator
 
         public DateTime? BuyingDate { get; set; }
 
-        public int MondayAM { get; set; }
+        public void SetPrice(HalfDay halfDay, int price)
+        {
+            prices[(int)halfDay] = price;
+            recalculateMovements();
+        }
 
-        public int MondayPM { get; set; }
+        public int GetPrice(HalfDay halfDay)
+        {
+            return prices[(int)halfDay];
+        }
 
-        public int TuesdayAM { get; set; }
+        public Movement GetMovement(HalfDay halfDay)
+        {
+            return movements[(int)halfDay];
+        }
 
-        public int TuesdayPM { get; set; }
+        private void recalculateMovements()
+        {
+            for (int i = 1; i < prices.Length; i++)
+            {
+                if (prices[i - 1] != 0 && prices[i] != 0)
+                {
+                    movements[i] = prices[i - 1] < prices[i] ? Movement.Increasing : Movement.Decreasing;
+                }
+            }
+        }
 
-        public int WednesdayAM { get; set; }
-
-        public int WednesdayPM { get; set; }
-
-        public int ThursdayAM { get; set; }
-
-        public int ThursdayPM { get; set; }
-
-        public int FridayAM { get; set; }
-
-        public int FridayPM { get; set; }
-
-        public int SaturdayAM { get; set; }
-
-        public int SaturdayPM { get; set; }
-
-        public Dictionary<Pattern, int> CalculateChanceOfNextWeekPattern()
+        public Dictionary<Pattern, int> CalculateChancesOfNextWeekPattern()
         {
             var chancesOfNextPattern = new Dictionary<Pattern, int>();
 
